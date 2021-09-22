@@ -1,53 +1,36 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  SafeAreaView,
-  FlatList,
-  StatusBar,
-} from 'react-native';
-
-const DATA = [
-  {
-    id: '1234',
-    title: 'First Item',
-  },
-  {
-    id: '12342',
-    title: 'Second Item',
-  },
-  {
-    id: '12344',
-    title: 'Third Item',
-  },
-];
-
-const Item = ({title}) => (
-  <View>
-    <Text>{title}</Text>
-  </View>
-);
+import {View, Text, StyleSheet, ImageBackground} from 'react-native';
 
 const App = () => {
-  const renderItem = ({item}) => <Item title={item.title} />;
-
   return (
-    <SafeAreaView>
-      <FlatList
-        data={DATA}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-      />
-    </SafeAreaView>
+    <View style={styles.container}>
+      <ImageBackground
+        style={styles.image}
+        resizeMode="cover"
+        source={{
+          uri: 'https://media-exp1.licdn.com/dms/image/C5603AQFe6INPvSY3tA/profile-displayphoto-shrink_200_200/0/1632061449207?e=1637798400&v=beta&t=7yoQrfdoGb2Y7cIuYXVA4VbmTXZuxitMKn-J1l8CiD0',
+        }}>
+        <Text style={styles.text}>Inside</Text>
+      </ImageBackground>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  image: {
+    flex: 1,
     justifyContent: 'center',
-    padding: 20,
+  },
+  text: {
+    color: 'white',
+    fontSize: 42,
+    lineHeight: 84,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    backgroundColor: '#000000c0',
   },
 });
 
