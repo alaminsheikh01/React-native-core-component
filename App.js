@@ -1,19 +1,45 @@
 import React from 'react';
-import {View, Text, StyleSheet, Button} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  FlatList,
+  StatusBar,
+} from 'react-native';
+
+const DATA = [
+  {
+    id: '1234',
+    title: 'First Item',
+  },
+  {
+    id: '12342',
+    title: 'Second Item',
+  },
+  {
+    id: '12344',
+    title: 'Third Item',
+  },
+];
+
+const Item = ({title}) => (
+  <View>
+    <Text>{title}</Text>
+  </View>
+);
 
 const App = () => {
-  const onPressLearnMore = () => {
-    console.log('Hello world');
-  };
+  const renderItem = ({item}) => <Item title={item.title} />;
+
   return (
-    <View style={[styles.container, styles.horizontal]}>
-      <Button
-        onPress={onPressLearnMore}
-        title="Click me"
-        color="#841584"
-        accessibilityLabel="learn more about this purple button"
+    <SafeAreaView>
+      <FlatList
+        data={DATA}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
