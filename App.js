@@ -1,20 +1,23 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableHighlight} from 'react-native';
 
 const App = () => {
-  const [titleText, setTitleText] = useState("Birds's Nest");
-  const bodyText = 'This is sample text';
+  const [count, setCount] = useState(0);
 
-  const onPresstitle = () => {
-    setTitleText("I'm from setTitleText [hello]");
+  const onPress = () => {
+    setCount(count + 1);
   };
 
   return (
-    <View>
-      <Text>
-        <Text>{titleText}</Text>
-      </Text>
-      <Text onPress={onPresstitle}>{bodyText}</Text>
+    <View style={{paddingLeft: 20, paddingTop: 40}}>
+      <TouchableHighlight onPress={onPress}>
+        <View>
+          <Text>Touch here!</Text>
+        </View>
+      </TouchableHighlight>
+      <View>
+        <Text>{count ? count : null}</Text>
+      </View>
     </View>
   );
 };
