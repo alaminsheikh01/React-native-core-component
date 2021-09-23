@@ -1,24 +1,54 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, TouchableHighlight} from 'react-native';
+import React, {useState, useRef} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  DrawerLayoutAndroid,
+} from 'react-native';
 
 const App = () => {
-  const [count, setCount] = useState(0);
+  const drawer = useRef(null);
 
-  const onPress = () => {
-    setCount(count + 1);
+  const [drawerPosition, setDrawerPosition] = useState('left');
+
+  const changeDrawerPostion = () => {
+    if (drawerPosition === 'left') {
+      setDrawerPosition('right');
+    } else {
+      setDrawerPosition('left');
+    }
   };
 
-  return (
-    <View style={{paddingLeft: 20, paddingTop: 40}}>
-      <TouchableHighlight onPress={onPress}>
-        <View>
-          <Text>Touch here!</Text>
-        </View>
-      </TouchableHighlight>
-      <View>
-        <Text>{count ? count : null}</Text>
-      </View>
+  const renderNavigationView = () => (
+    <View>
+      <Text>I'm in the drawer</Text>
+      <Button
+        title="Close Drawer"
+        onPress={() => drawer.current.closeDrawer()}
+      />
     </View>
+  );
+  return (
+    <DrawerLayoutAndroid
+      ref={drawer}
+      drawerWidth={300}
+      drawerPosition={drawerPosition}
+      renderNavigationView={renderNavigationView}>
+      <View>
+        <Text>Drawer on the {drawerPosition}!</Text>
+
+        <Button
+          title="Change Drawer Postion"
+          onPress={() => changeDrawerPostion()}
+        />
+        <Text>Swipe from the side or press button below to see it!</Text>
+        <Button
+          title="Open Drawer"
+          onPress={() => drawer.current.openDrawer()}
+        />
+      </View>
+    </DrawerLayoutAndroid>
   );
 };
 
